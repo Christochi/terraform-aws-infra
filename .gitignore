@@ -43,7 +43,7 @@
 # crash.log
 # blah.txt
 
-#*.gitignore
+*.gitignore
 
 *.drawio
 *.html
