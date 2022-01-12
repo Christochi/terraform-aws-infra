@@ -1,0 +1,52 @@
+#  Local .terraform directories
+**/.terraform*
+# **/packer/
+# **/certs/*
+# **/temp/
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+*.lock.hcl
+
+# Ignore Backend Files
+# backend.tf
+# override.tf
+
+# Other files that should not be kept
+# id_rsa*
+# *.json
+# *.zip
+# *.pem
+# *.sh
+# *.svg
+# *.pkr.hcl
+*.pkrvars.hcl
+
+# **/demo/*.txt
+# **/demo/perf/*.txt
+# !**/demo/*.sh
+# !**/demo/perf/*.sh
+# !**/demo/softhsm/*.sh
+# !**/VaultDR/*.sh
+# !update_groups.sh
+# !unseal.sh
+# !cfssl*.sh
+# !cert.sh
+# !cleanup.sh
+# !generate_consul_certs.sh
+# !wait_for_vault.sh
+
+# crash.log
+# blah.txt
+
+*.ignore
+
+*.drawio
+*.html
+**hotelbiz-website
+*/aws-ec2/variables.tf
+*/aws-vpc/variables.tf

@@ -1,0 +1,40 @@
+- name: install apache
+  yum:
+    name: 
+    - httpd
+    - php
+    - php-mysql
+    state: latest
+
+- name: start apache service
+  service: 
+    name: httpd
+    state: started
+
+- name: upload webfiles
+  copy:
+    dest: /var/www/html
+    src: files/hotelbiz-website
+
+- name: upload webpage
+  copy:
+    dest: /var/www/html/
+    src: templates/index.html
+  notify: restart apache service
+
+- name: Import EPEL GPG key
+  rpm_key:
+    key: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+    state: present
+
+- name: Install EPEL 7
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: Install dependencies
+  yum:
+    name: ['unzip', 'jq', 'awscli', 'ansible', 'python2-boto3', 'htop', 'git']
+    state: present
+    update_cache: true
+
