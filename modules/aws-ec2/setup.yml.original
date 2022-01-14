@@ -1,0 +1,25 @@
+- hosts: localhost
+  gather_facts: true
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  vars:
+
+  tasks:
+
+  - name: Gather instance metadata
+    ec2_metadata_facts:
+
+  - name: blah.html
+    copy:
+      content: '
+        <html>
+        hello world
+          </html>'
+      dest: /var/www/html/blah.html
+  
+  - name: reload service httpd
+    systemd:
+      name: httpd
+      state: reloaded

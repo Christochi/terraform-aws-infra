@@ -1,0 +1,25 @@
+- hosts: localhost
+  gather_facts: true
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  vars:
+
+  tasks:
+
+  - name: Gather instance metadata
+    ec2_metadata_facts:
+
+  
+  # - name: update default apache site
+  #   lineinfile:
+  #     dest: /etc/apache2/sites-enabled/000-default.conf
+  #     regexp: (.)+DocumentRoot /var/www/html
+  #     line: DocumentRoot /var/www/wordpress
+
+  - name: reload service httpd
+    systemd:
+      name: httpd
+      state: reloaded
+  

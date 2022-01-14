@@ -8,7 +8,9 @@ packer {
 }
 
 locals {
+
   ami_name = "${var.ami_name}-${formatdate("DD-MMM-YYYY-ss-mm-hh", timestamp())}" # -${timestamp() | clean_resource_name}
+
 }
 source "amazon-ebs" "tochi-ami" {
 
@@ -35,12 +37,14 @@ source "amazon-ebs" "tochi-ami" {
 }
 
 build {
+
   sources = ["source.amazon-ebs.tochi-ami"]
 
   provisioner "ansible" {
 
     playbook_file = "./install.yml"
     user          = var.ssh_username
+    
   }
 }
 

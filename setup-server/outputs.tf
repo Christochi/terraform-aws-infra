@@ -1,10 +1,10 @@
 output "instance-data" {
 
-    value = {
-       subnet= module.instance.subnet-data
-       ami = module.instance.custom-ami
-    }
+  value = {
+    subnet = module.instance.subnet-data
+    ami    = module.instance.ec2-data
+  }
 
-    description = "display subnet id, ami id and ami name"
+  description = "display subnet id, ami id and ami name"
 
 }

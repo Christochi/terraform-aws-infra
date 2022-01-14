@@ -1,0 +1,8 @@
+ami_name                = "tochi-custom-ami"
+region                  = "us-west-2"
+instance_type           = "t2.micro"
+source_ami              = "ami-00f7e5c52c0f43726"
+ami_virtualization_type = "hvm"
+subnet_id               = "subnet-00000"
+vpc_id                  = "vpc-00000"
+ssh_username            = "ec2-user"

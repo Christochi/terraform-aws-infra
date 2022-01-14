@@ -13,7 +13,7 @@ data "aws_subnet" "west-subnet" {
 # get custom ami built by packer
 data "aws_ami" "webserver" {
 
-  owners = ["self"]
+  owners      = ["self"]
   most_recent = true
 
   filter {
@@ -29,15 +29,16 @@ data "aws_ami" "webserver" {
 }
 
 # get security groups id
-# data "aws_security_groups" "sg" {
+data "aws_security_groups" "sg" {
 
-#   filter {
+  filter {
 
-#     name = "tag:Name"
-#     values = ["${var.sg-tag.prefix}-sg"]
-#   }
+    name   = "tag:Name"
+    values = ["${var.sg-tag.prefix}-sg"]
 
-# }
+  }
+
+}
 
 # create EC2 instance
 resource "aws_instance" "server" {
@@ -45,16 +46,20 @@ resource "aws_instance" "server" {
   ami           = data.aws_ami.webserver.id # ami in us-west-2
   instance_type = var.instance
 
-  subnet_id = data.aws_subnet.west-subnet.id 
+  subnet_id = data.aws_subnet.west-subnet.id
 
-  vpc_security_group_ids = [var.sg] # attach security group to ec2
+  # attach security group to ec2
+  # join() produces a string from a list of strings separated by a delimiter
+  vpc_security_group_ids = [join(", ", data.aws_security_groups.sg.ids)]
 
   key_name = var.ssh-key # attach ssh key to ec2
+
+  user_data = data.template_cloudinit_config.config.rendered
 
   tags = {
 
     Name = "${var.ec2-tags.name}webserver"
-    
+
   }
-  
+
 }

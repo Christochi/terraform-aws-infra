@@ -10,17 +10,18 @@
   service: 
     name: httpd
     state: started
-
-- name: upload webfiles
-  copy:
-    dest: /var/www/html
-    src: files/hotelbiz-website
-
+   
 - name: upload webpage
   copy:
     dest: /var/www/html/
     src: templates/index.html
-  notify: restart apache service
+  # notify: restart apache service
+
+- name: download and extract wordpress
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /var/www/html
+    remote_src: yes
 
 - name: Import EPEL GPG key
   rpm_key:

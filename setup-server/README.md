@@ -1,14 +1,13 @@
 # AWS EC2 Instance
-Instance is created using a custom ami created through packer. It contains necessary applications for hosting a website, including the web files
 
 ## Description
-server for hosting web application
+EC2 Instance is created using a custom ami created through packer. It contains necessary applications for hosting a web app.
 
 #### modules
 `aws-ec2` module is the called child module
 
 #### setup-server
-root module for calling child module
+main.tf is the root module for calling child module
 
 ## Requirement
 - aws account

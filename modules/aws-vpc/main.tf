@@ -41,7 +41,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone = data.aws_availability_zones.azs.names[count.index]
 
   # assigned a public IP address to instances launched in the subnet
-  map_public_ip_on_launch = true 
+  map_public_ip_on_launch = true
 
   tags = {
 
@@ -85,6 +85,36 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
+# elastic ip
+resource "aws_eip" "eip" {
+
+  vpc = true # the EIP is in a VPC
+
+  tags = {
+
+    Name = "${var.tags.prefix}-eip"
+
+  }
+
+}
+
+# create NAT gateway in the public subnets
+resource "aws_nat_gateway" "nat" {
+
+  allocation_id = aws_eip.eip.id # EIP allocation ID
+
+  # count     = length(aws_subnet.public_subnet) # create 3 NATs
+  # subnet_id = aws_subnet.public_subnet[count.index].id
+  subnet_id = aws_subnet.public_subnet[0].id
+
+  tags = {
+
+    Name = "${var.tags.prefix}-nat-${0}"
+
+  }
+
+}
+
 # custom public route table
 resource "aws_route_table" "public_route_table" {
 
@@ -121,7 +151,7 @@ resource "aws_route_table" "private_route_table" {
 
   route {
 
-    cidr_block = var.cidr_route_table # traffic ip
+    cidr_block     = var.cidr_route_table # traffic ip
     nat_gateway_id = aws_nat_gateway.nat.id
 
   }
@@ -144,36 +174,7 @@ resource "aws_route_table_association" "private_route_table_assoc" {
 
 }
 
-# elastic ip
-resource "aws_eip" "eip" {
-
-  vpc = true # the EIP is in a VPC
-
-  tags = {
-
-    Name = "${var.tags.prefix}-eip"
-
-  }
-
-}
-
-# create NAT gateway in the public subnets
-resource "aws_nat_gateway" "nat" {
-
-  allocation_id = aws_eip.eip.id # EIP allocation ID
-
-  # count     = length(aws_subnet.public_subnet) # create 3 NATs
-  # subnet_id = aws_subnet.public_subnet[count.index].id
-  subnet_id = aws_subnet.public_subnet[0].id
-
-  tags = {
-
-    Name = "${var.tags.prefix}-nat-${0}"
-
-  }
-
-}
-
+# fetches your ip addr
 data "http" "myip" {
 
   url = "http://ipinfo.io/ip"
@@ -183,48 +184,48 @@ data "http" "myip" {
 # create and attach security group to vpc
 resource "aws_security_group" "sg" {
 
-  name = "${var.tags.prefix}-sg"
+  name        = "${var.tags.prefix}-sg"
   description = "traffic rules"
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id      = aws_vpc.my_vpc.id
 
   ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
+    description = "SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
 
     # fetches your ip address and 
     # removes newline characters at the end of a string
-    cidr_blocks      = ["${chomp(data.http.myip.body)}/32"]
+    cidr_blocks = ["${chomp(data.http.myip.body)}/32"]
   }
 
   ingress {
-    description      = "HTTP"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
 
-    # fetches your ip address and 
-    # removes newline characters at the end of a string
-    cidr_blocks      = ["0.0.0.0/0"]
+    # ingress traffic ip
+    cidr_blocks = [var.sg-inbound]
   }
 
   ingress {
-    description      = "HTTPS"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
+    description = "HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
 
-    # fetches your ip address and 
-    # removes newline characters at the end of a string
-    cidr_blocks      = ["0.0.0.0/0"]
+    # ingress traffic ip
+    cidr_blocks = [var.sg-inbound]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = [var.sg-outbound]
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+
+    # egress traffic ip
+    cidr_blocks = [var.sg-outbound]
   }
 
   tags = {
@@ -232,5 +233,5 @@ resource "aws_security_group" "sg" {
     Name = "${var.tags.prefix}-sg"
 
   }
-  
+
 }
