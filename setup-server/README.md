@@ -15,7 +15,7 @@ main.tf is the root module for calling child module
 
 ## Setup
 - configure access and secret key:
-- in the `aws-ec2/setup-wp.yml`, can install packages and/or software using ansible
+- in the `aws-ec2/setup-wp.yml`, can add install packages and/or software for installation
 - go to `setup-server/`:
     - run `terraform init` cmd
     - run `terraform plan` cmd
