@@ -15,7 +15,6 @@
   copy:
     dest: /var/www/html/
     src: templates/index.html
-  # notify: restart apache service
 
 - name: download and extract wordpress
   unarchive:
@@ -38,6 +37,3 @@
     name: ['unzip', 'jq', 'awscli', 'ansible', 'python2-boto3', 'htop', 'git']
     state: present
     update_cache: true
-
-
-
