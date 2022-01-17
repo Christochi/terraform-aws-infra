@@ -39,11 +39,5 @@
     state: present
     update_cache: true
 
-- name: unzip vault
-  unarchive:
-    src: "/tmp/vault_{{vault_version}}_linux_amd64.zip"
-    dest: /usr/local/bin
-    owner: root
-    group: root
-    remote_src: yes
+
 

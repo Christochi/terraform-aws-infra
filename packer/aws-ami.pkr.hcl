@@ -39,14 +39,6 @@ source "amazon-ebs" "tochi-ami" {
 build {
 
   sources = ["source.amazon-ebs.tochi-ami"]
-  
-  # install vault binary
-  provisioner "file" {
-
-    destination = "/tmp/vault_${var.vault_version}_linux_amd64.zip"
-    source      = "./files/vault_${var.vault_version}_linux_amd64.zip"
-
-  }
 
   # install packages using ansible
   provisioner "ansible" {
@@ -55,6 +47,7 @@ build {
     user          = var.ssh_username
     
   }
+  
 }
 
 
@@ -127,12 +120,5 @@ variable "ssh_username" {
   type        = string
   description = "ssh username for linux"
   default     = ""
-
-}
-
-variable "vault_version" {
-
-  type    = string
-  default = ""
 
 }
