@@ -23,6 +23,6 @@ data "template_cloudinit_config" "config" {
 # renders a template from a template string
 data "template_file" "ansible_bootstrap" {
 
-  template = file("${path.module}/setup-wp.yml")
+  template = file("${path.module}/setup-vault.yml")
 
 }

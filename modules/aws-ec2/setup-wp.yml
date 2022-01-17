@@ -23,41 +23,4 @@
       name: httpd
       state: reloaded
   
-  # creates user  
-  - name: create vault user
-    user:
-      name: vault
-      system: yes
-      shell: /bin/bash
-      home: /etc/vault
-      createhome: no
-      append: yes
-
-  - name: create directory for configuration and tls 
-    file:
-      path: /etc/vault
-      state: directory
-      owner: vault
-      group: vault
-      mode: '0770'
-
-  # - name: config file for running vault as a service
-  #   copy:
-  #     dest: /etc/vault
-  #     src: vault-config.hcl
-
-  - name: Create vault data directory
-    file:
-      path: /var/lib/vault/data
-      state: directory
-      recurse: true
-      owner: vault
-      group: vault
-      mode: '0770'
-  
-  # - name: Install systemd unit
-  #   copy:
-  #     src: vault.service
-  #     dest: /lib/systemd/system/vault.service
-
   
