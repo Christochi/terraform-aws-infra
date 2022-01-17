@@ -1,7 +1,7 @@
 # Packer
 
 ## Description
-build custom ami using an ami image from amazon, uplosds the web files and install necessary applications used for deploying web apps in the custom ami
+builds custom ami using an ami image from amazon, uploads the files and installs necessary applications used for deploying apps in the custom ami
 
 ## Requirement
 - install packer
