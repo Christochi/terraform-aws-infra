@@ -1,7 +1,7 @@
 # Terraform-AWS-Webapp
 
 ## Description
-The Terraform configuration sets up infrastructure for deploying a web application. The terraform configuration consists of:
+The Terraform configuration sets up infrastructure for deploying applications. The terraform configuration consists of:
 - `modules`
 - `packer`
 - `setup-nwk`

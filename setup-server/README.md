@@ -1,7 +1,7 @@
 # AWS EC2 Instance
 
 ## Description
-EC2 Instance is created using a custom ami created through packer. It contains necessary applications for hosting a web app.
+EC2 Instance is created using a custom ami created through packer. It contains necessary applications for hosting apps.
 
 #### modules
 `aws-ec2` module is the called child module
@@ -15,7 +15,7 @@ main.tf is the root module for calling child module
 
 ## Setup
 - configure access and secret key:
-- in the `aws-ec2/setup-wp.yml`, can add install packages and/or software for installation
+- in the `aws-ec2/setup-**.yml`, can add packages and/or software for installation at startup using cloud-init
 - go to `setup-server/`:
     - run `terraform init` cmd
     - run `terraform plan` cmd

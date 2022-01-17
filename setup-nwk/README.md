@@ -1,5 +1,5 @@
 # AWS Custom Network
-custom network comprises a VPC, 3 private subnets, 3 public subnets, NAT gateway, internet gateways, route tables, security group
+custom network comprises a VPC, 3 private subnets, 3 public subnets, NAT gateway, internet gateways, route tables, security group, etc
 
 ## Description
 custom network made for deploying web applications
