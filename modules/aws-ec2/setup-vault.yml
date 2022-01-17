@@ -1,0 +1,57 @@
+- hosts: localhost
+  gather_facts: true
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  tasks:
+
+  - name: install yum-config-manger
+    yum:
+      name: yum-utils
+      state: present
+  
+  - name: add official HashiCorp Linux repository
+    shell:
+      cmd: sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+  
+  - name: install vault
+    yum:
+      name: vault
+   
+  - name: Create vault data directory
+    file:
+      path: /var/lib/vault/data
+      state: directory
+      recurse: true
+      owner: vault
+      group: vault
+      mode: '0770'
+  
+  - name: create directory for configuration and tls 
+    file:
+      path: /etc/vault.d/
+      state: directory
+      owner: vault
+      group: vault
+      mode: '0770'
+
+  - name: config file for running vault as a service
+    copy:
+      dest: /etc/vault.d/vault.hcl
+      content: '
+      listener "tcp" {
+
+        address     = "127.0.0.1:8200"
+        tls_disable = 1
+
+      }
+
+      storage "file" {
+
+        path = "/var/lib/vault/data"
+    
+      }'
+      owner: vault
+      group: vault
+      force: yes
