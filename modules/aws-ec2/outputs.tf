@@ -14,8 +14,16 @@ output "ec2-data" {
     public-ip = aws_instance.server.public_ip
     sg-id     = data.aws_security_groups.sg.ids
 
+
   }
 
   description = "display custom ami id, name, external ip, sg id"
+
+}
+
+output "ansible" {
+
+  value       = data.template_cloudinit_config.config.rendered
+  description = "prints the setup-***.yml contents. see data.tf for more info"
 
 }

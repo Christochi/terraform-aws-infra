@@ -1,6 +1,7 @@
 # startup configuration utility for cloud compute instances
 data "template_cloudinit_config" "config" {
 
+  # change gzip, base64_encode to false to see output in plain text"
   gzip          = true
   base64_encode = true
 

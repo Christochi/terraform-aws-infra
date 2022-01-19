@@ -6,18 +6,22 @@
 
   tasks:
 
-  - name: install yum-config-manger
-    yum:
-      name: yum-utils
-      state: present
-  
-  - name: add official HashiCorp Linux repository
-    shell:
-      cmd: sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
-  
-  - name: install vault
+  - name: Add multiple repositories into the same file
+    yum_repository:
+      name: Hashicorp
+      description: Hashicorp AmazonLinux Repository
+      file: hashicorp
+      baseurl: https://rpm.releases.hashicorp.com/AmazonLinux/\$releasever/\$basearch/stable
+      gpgcheck: yes
+      gpgkey: https://rpm.releases.hashicorp.com/gpg
+      enabled: yes
+
+  - name: Install Packages
     yum:
       name: vault
+      state: present
+      update_cache: true
+    register: installs
    
   - name: Create vault data directory
     file:
@@ -39,27 +43,27 @@
   - name: config file for running vault as a service
     copy:
       dest: /etc/vault.d/vault.hcl
-      content: '
-      listener "tcp" {
+      content: |  
+        listener "tcp" {
 
-        address     = "127.0.0.1:8200"
-        tls_disable = 1
+          address     = "127.0.0.1:8200"
+          tls_disable = 1
 
-      }
+        }
 
-      storage "file" {
+        storage "file" {
 
-        path = "/var/lib/vault/data"
-    
-      }'
+          path = "/var/lib/vault/data"
+      
+        }
       owner: vault
       group: vault
       force: yes
-
+    
   - name: install systemd
     copy:
       dest: /usr/lib/systemd/system/vault.service
-      content: '
+      content: |
         [Unit]
         Description="HashiCorp Vault - A tool for managing secrets"
         Documentation=https://www.vaultproject.io/docs/
@@ -98,10 +102,11 @@
 
         [Install]
         WantedBy=multi-user.target
-        '
+        
       owner: vault
       group: vault
-      force: yes   
+      force: yes 
+    register: vault_service  
 
   - name: Create vault user
     user:
@@ -112,7 +117,9 @@
       createhome: null
       append: yes
 
-  - name: start vault service
+  - name: reloaded vault service
     service:
       name: vault
-      state: started
+      state: restarted
+      enabled: yes
+    when: vault_service is changed

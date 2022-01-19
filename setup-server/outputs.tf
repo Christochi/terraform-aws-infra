@@ -8,3 +8,8 @@ output "instance-data" {
   description = "display subnet id, ami id and ami name"
 
 }
+
+output "ansible" {
+
+  value = module.instance.ansible
+}
