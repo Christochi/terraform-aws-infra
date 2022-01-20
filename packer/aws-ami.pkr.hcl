@@ -45,9 +45,9 @@ build {
 
     playbook_file = "./install.yml"
     user          = var.ssh_username
-    
+
   }
-  
+
 }
 
 
