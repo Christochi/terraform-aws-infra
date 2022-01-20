@@ -1,6 +1,6 @@
 output "subnet-data" {
 
-  value       = data.aws_subnet.west-subnet.id
+  value       = data.aws_subnet.west_subnet.id
   description = "print subnet id"
 
 }
@@ -24,6 +24,6 @@ output "ec2-data" {
 output "ansible" {
 
   value       = data.template_cloudinit_config.config.rendered
-  description = "prints the setup-***.yml contents. see data.tf for more info"
+  description = "prints the setup.yml contents. see data.tf for more info"
 
 }

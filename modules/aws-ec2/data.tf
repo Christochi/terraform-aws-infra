@@ -1,3 +1,16 @@
+# renders a template from a template string
+data "template_file" "ansible_bootstrap" {
+
+  template = file("${path.module}/setup.yml")
+
+  vars = {
+
+    playbook = var.ansible-playbook
+
+  }
+
+}
+
 # startup configuration utility for cloud compute instances
 data "template_cloudinit_config" "config" {
 
@@ -21,12 +34,5 @@ data "template_cloudinit_config" "config" {
     )
 
   }
-
-}
-
-# renders a template from a template string
-data "template_file" "ansible_bootstrap" {
-
-  template = file("${path.module}/setup-vault.yml")
 
 }

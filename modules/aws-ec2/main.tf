@@ -1,5 +1,5 @@
 # fetch subnet id
-data "aws_subnet" "west-subnet" {
+data "aws_subnet" "west_subnet" {
 
   filter {
 
@@ -46,7 +46,7 @@ resource "aws_instance" "server" {
   ami           = data.aws_ami.webserver.id # ami in us-west-2
   instance_type = var.instance
 
-  subnet_id = data.aws_subnet.west-subnet.id
+  subnet_id = data.aws_subnet.west_subnet.id
 
   # attach security group to ec2
   # join() produces a string from a list of strings separated by a delimiter

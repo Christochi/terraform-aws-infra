@@ -41,3 +41,12 @@ variable "ssh-key" {
   default = "tochi-ssh-keypair"
 
 }
+
+variable "ansible-playbook" {
+
+  type        = string
+  description = "placeholder for ansible vault playbook"
+
+  default = "ansible-vault"
+
+}
