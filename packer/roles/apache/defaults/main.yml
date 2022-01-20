@@ -1,0 +1,2 @@
+default_webpage_dest: /var/www/html/
+default_webpage_src: templates/index.html
