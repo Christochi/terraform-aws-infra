@@ -10,6 +10,9 @@ data "template_cloudinit_config" "config" {
 
     filename     = "init.cfg"
     content_type = "text/x-shellscript"
+
+    # templatefile fxn reads the file at the given path and renders its content 
+    # as a template 
     content = templatefile(
       "${path.module}/script.sh",
       {
