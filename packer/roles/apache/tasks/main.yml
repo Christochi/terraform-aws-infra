@@ -16,12 +16,6 @@
     dest: "{{default_webpage_dest}}"
     src: "{{default_webpage_src}}"
 
-- name: download and extract wordpress
-  unarchive:
-    src: https://wordpress.org/latest.tar.gz
-    dest: "{{default_webpage_dest}}"
-    remote_src: yes
-
 - name: Import EPEL GPG key
   rpm_key:
     key: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
