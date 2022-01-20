@@ -4,7 +4,7 @@ data "aws_availability_zones" "azs" {}
 # create VPC
 resource "aws_vpc" "my_vpc" {
 
-  cidr_block = var.vpc_cidr # vpc supernet
+  cidr_block = var.vpc-cidr # vpc supernet
 
   tags = {
 
@@ -18,11 +18,11 @@ resource "aws_vpc" "my_vpc" {
 locals {
 
   # cidrsubnet() formulates the cidr block addresses
-  public_cidr_list = [cidrsubnet(var.vpc_cidr, 8, 11),
-  cidrsubnet(var.vpc_cidr, 8, 12), cidrsubnet(var.vpc_cidr, 8, 13)]
+  public_cidr_list = [cidrsubnet(var.vpc-cidr, 8, 11),
+  cidrsubnet(var.vpc-cidr, 8, 12), cidrsubnet(var.vpc-cidr, 8, 13)]
 
-  private_cidr_list = [cidrsubnet(var.vpc_cidr, 8, 21),
-  cidrsubnet(var.vpc_cidr, 8, 22), cidrsubnet(var.vpc_cidr, 8, 23)]
+  private_cidr_list = [cidrsubnet(var.vpc-cidr, 8, 21),
+  cidrsubnet(var.vpc-cidr, 8, 22), cidrsubnet(var.vpc-cidr, 8, 23)]
 
 }
 
@@ -122,7 +122,7 @@ resource "aws_route_table" "public_route_table" {
 
   route {
 
-    cidr_block = var.cidr_route_table # traffic ip
+    cidr_block = var.cidr-route-table # traffic ip
     gateway_id = aws_internet_gateway.igw.id
 
   }
@@ -151,7 +151,7 @@ resource "aws_route_table" "private_route_table" {
 
   route {
 
-    cidr_block     = var.cidr_route_table # traffic ip
+    cidr_block     = var.cidr-route-table # traffic ip
     nat_gateway_id = aws_nat_gateway.nat.id
 
   }

@@ -1,4 +1,4 @@
-variable "vpc_cidr" {
+variable "vpc-cidr" {
 
   description = "Default Supernet that all networks reside within"
   type        = string
