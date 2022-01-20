@@ -17,7 +17,7 @@ variable "tags" {
 
 }
 
-variable "cidr_route_table" {
+variable "cidr-route-table" {
 
   description = "traffic ip rule for public subnet"
   type        = string
