@@ -15,7 +15,8 @@ main.tf is the root module for calling child module
 
 ## Setup
 - configure access and secret key:
-- in the `aws-ec2/setup-**.yml`, can add packages and/or software for installation at startup using cloud-init
+- in the `aws-ec2/setup.yml`, can add packages and/or apps for installation at startup using cloud-init
+- cloud init would fail because there is no ansible playbook to run, but it won't prevent terraform from spinning-up EC2 instance. SSH to the instance,place an ansible playbook at `/etc/ansible/role`, and then run `ansible-playbook etc/ansible/bootstrap.yml` cmd on the terminal to start the bootstrap file that will run the ansible playbook
 - go to `setup-server/`:
     - run `terraform init` cmd
     - run `terraform plan` cmd
