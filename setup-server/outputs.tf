@@ -12,4 +12,5 @@ output "instance-data" {
 output "ansible" {
 
   value = module.instance.ansible
+  
 }

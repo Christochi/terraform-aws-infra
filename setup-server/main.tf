@@ -2,5 +2,6 @@
 module "instance" {
 
   source = "../modules/aws-ec2" # directory of the vpc module
+  create = true # true = creates resource, false = does not create
 
 }
