@@ -29,7 +29,7 @@ variable "instance" {
   type        = string
   description = "virtual server"
 
-  default = "t2.micro"
+  default = "t3.micro"
 
 }
 
@@ -48,5 +48,23 @@ variable "ansible-playbook" {
   description = "placeholder for ansible vault playbook"
 
   default = "ansible-vault"
+
+}
+
+variable "create" {
+
+  type        = bool
+  description = "control logic to enable or disable creation of a resource"
+
+  default = true
+
+}
+
+variable "regex" {
+
+  type = string
+  description = "string for advanced filtering"
+
+  default = "tochi-custom-ami-*"
 
 }

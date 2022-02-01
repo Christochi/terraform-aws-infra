@@ -15,6 +15,7 @@ data "aws_ami" "webserver" {
 
   owners      = ["self"]
   most_recent = true
+  name_regex  = var.regex # "string to aid in filtering"
 
   filter {
     name   = "root-device-type"
@@ -42,6 +43,8 @@ data "aws_security_groups" "sg" {
 
 # create EC2 instance
 resource "aws_instance" "server" {
+
+  count = var.create ? 1 : 0
 
   ami           = data.aws_ami.webserver.id # ami in us-west-2
   instance_type = var.instance

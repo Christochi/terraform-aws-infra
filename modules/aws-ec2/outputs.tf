@@ -11,7 +11,7 @@ output "ec2-data" {
 
     ami-id    = data.aws_ami.webserver.id
     ami-name  = data.aws_ami.webserver.name
-    public-ip = aws_instance.server.public_ip
+    public-ip = aws_instance.server[0].public_ip
     sg-id     = data.aws_security_groups.sg.ids
 
 
