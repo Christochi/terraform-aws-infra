@@ -6,6 +6,7 @@ The Terraform configuration sets up infrastructure for deploying applications. T
 - `packer`
 - `setup-nwk`
 - `setup-server`
+- `setup-database`
 
 ## Requirement
 - AWS account
