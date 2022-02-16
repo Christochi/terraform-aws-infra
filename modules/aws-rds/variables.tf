@@ -1,16 +1,3 @@
-variable "ec2-tag" {
-
-  type        = map(string)
-  description = "filtering info about the instance"
-
-  default = {
-
-    "name" = "tochi-"
-
-  }
-
-}
-
 variable "db-subnet-grp-name" {
 
   type        = string
@@ -20,6 +7,16 @@ variable "db-subnet-grp-name" {
 
 
 }
+
+variable "subnet-ids" {
+
+  type = list(string)
+  description = "list of subnets in your vpc"
+
+  default = []
+
+}
+
 variable "db-subnet-tag" {
 
   description = "db subnet group tag"
