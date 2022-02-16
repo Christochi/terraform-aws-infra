@@ -1,24 +1,10 @@
-# locals {
-
-# }
-
-# fetch subnet ids
-data "aws_subnets" "west_subnet" {
-
-  filter {
-
-    name   = "tag:Name"
-    values = ["${var.ec2-tag.name}public-subnet*"]
-
-  }
-
-}
-
 # create db subnet group
 resource "aws_db_subnet_group" "rds_subnet_group" {
 
-  name       = var.db-subnet-grp-name # name of the DB subnet group
-  subnet_ids = data.aws_subnets.west_subnet.ids
+  name = var.db-subnet-grp-name # name of the DB subnet group
+
+  # list of subnets in your VPC
+  subnet_ids = var.subnet-ids
 
   tags = {
 
@@ -56,4 +42,3 @@ resource "aws_db_instance" "db" {
   }
 
 }
-

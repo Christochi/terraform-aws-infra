@@ -1,3 +1,9 @@
+output subnet-ids {
+
+  value = aws_db_subnet_group.rds_subnet_group.subnet_ids
+
+}
+
 output "db-data" {
 
   value = {
