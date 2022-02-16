@@ -62,7 +62,7 @@ variable "create" {
 
 variable "regex" {
 
-  type = string
+  type        = string
   description = "string for advanced filtering"
 
   default = "tochi-custom-ami-*"
