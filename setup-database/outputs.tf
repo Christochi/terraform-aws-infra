@@ -23,3 +23,9 @@ output "rds-data" {
 
 }
 
+output subnet-ids {
+
+  value = module.rds.subnet-ids
+
+}
+
