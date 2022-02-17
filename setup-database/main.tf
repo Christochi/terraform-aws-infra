@@ -19,8 +19,8 @@ locals {
   # for module rds
   rds_create = local.instance_create ? false : true
 
-  # subnet-list = module.rds.subnet-ids
-  # subnets = subnet-list != [] ? subnet-list : data.aws_subnets.west_subnet.ids
+  subnet-list = module.rds.subnet-ids
+  subnets     = local.subnet-list != [] ? local.subnet-list : data.aws_subnets.west_subnet.ids
 
 }
 
@@ -38,7 +38,7 @@ module "rds" {
   source = "../modules/aws-rds" # directory of the database module
   create = local.rds_create     # true = creates resource, false = does not create
 
-  subnet-ids = data.aws_subnets.west_subnet.ids
+  subnet-ids = local.subnets
 
 }
 

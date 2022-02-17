@@ -10,7 +10,7 @@ variable "db-subnet-grp-name" {
 
 variable "subnet-ids" {
 
-  type = list(string)
+  type        = list(string)
   description = "list of subnets in your vpc"
 
   default = []
