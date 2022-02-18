@@ -4,3 +4,10 @@ variable "region" {
   type        = string
 
 }
+
+variable "playbook" {
+
+  description = "name of playbook"
+  type        = string
+
+}
