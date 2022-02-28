@@ -1,9 +1,6 @@
 - name: install apache
   yum:
-    name: 
-    - httpd
-    - php
-    - php-mysql
+    name: httpd
     state: latest
 
 - name: start apache service
@@ -15,6 +12,7 @@
   copy:
     dest: "{{default_webpage_dest}}"
     src: "{{default_webpage_src}}"
+  when: upload == true
 
 - name: Import EPEL GPG key
   rpm_key:
