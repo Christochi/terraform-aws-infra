@@ -8,7 +8,8 @@ custom network made for deploying web applications
 `aws-vpc` module is the module being called
 
 #### setup-nwk 
-main.tf in this directory is the root module for calling child module
+- `main.tf` in this directory is the root module for calling child module
+-  you can change the region of the network infra in `terraform.tfvars`
 
 ## Requirement
 - aws account
