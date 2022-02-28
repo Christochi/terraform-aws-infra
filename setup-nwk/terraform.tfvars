@@ -1,1 +1,1 @@
-region = "us-west-2" #geographical location of infrastructure
+region = "ca-central-1" # geographical location of infrastructure
