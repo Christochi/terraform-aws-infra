@@ -51,7 +51,7 @@ resource "aws_subnet" "public_subnet" {
 
 }
 
-# # creates 3 private subnets in 3 azs
+# creates 3 private subnets in 3 azs
 resource "aws_subnet" "private_subnet" {
 
   vpc_id = aws_vpc.my_vpc.id # vpc id
