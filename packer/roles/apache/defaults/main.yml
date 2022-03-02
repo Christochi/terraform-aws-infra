@@ -1,3 +1,6 @@
 default_webpage_dest: /var/www/html/
 default_webpage_src: templates/index.html
 upload: false
+
+epel_release_url: http://download.fedoraproject.org/pub/epel/7/$basearch
+epel_key_url: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
