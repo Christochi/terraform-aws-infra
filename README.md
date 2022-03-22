@@ -4,9 +4,9 @@
 The Terraform configuration sets up infrastructure for deploying applications. The terraform configuration consists of:
 - `modules`
 - `packer`
+- `setup-database`
 - `setup-nwk`
 - `setup-server`
-- `setup-database`
 
 ## Requirement
 - AWS account
@@ -17,4 +17,9 @@ The Terraform configuration sets up infrastructure for deploying applications. T
 ## Setup
 - spin-up network infrastructure in the [setup-nwk](./setup-nwk/README.md) directory
 - build ami image using packer in the [packer](./packer/README.md) directory
+
+#### EC2 Setup
+- do above steps
 - spin-up ec2 instance in the [setup-server](./setup-server/README.md) directory
+
+#### Database Setup
