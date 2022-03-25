@@ -5,9 +5,10 @@ output "network-data" {
   value = {
 
     vpc-id    = aws_vpc.my_vpc.id
-    subnet-id = aws_subnet.public_subnet[1].id
+    subnet-id = join( "", aws_subnet.public_subnet[*].id ) # separates list 
     sg-id     = aws_security_group.sg.id
-    subnet-az = aws_subnet.public_subnet[1].availability_zone
+    subnet-az = join( "", aws_subnet.public_subnet[*].availability_zone ) # separates list
+    
 
   }
 }
