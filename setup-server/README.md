@@ -12,6 +12,7 @@ main.tf is the root module for calling child module
 ## Requirement
 - aws account
 - terraform
+- working knowledge of ansible
 
 ## Setup
 ***in `module/aws-ec2/setup.yml`, an ansible playbook is referenced and also to be executed by cloud init as userdata.***
