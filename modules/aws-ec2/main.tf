@@ -45,9 +45,9 @@ data "aws_security_groups" "sg" {
 resource "aws_instance" "server" {
 
   # 1 = true/create, 0 = false/don't create
-  count = var.create ? 1 : 0 
+  count = var.create ? 1 : 0
 
-  ami           = data.aws_ami.webserver.id 
+  ami           = data.aws_ami.webserver.id
   instance_type = var.instance
 
   subnet_id = data.aws_subnet.west_subnet.id
@@ -59,7 +59,7 @@ resource "aws_instance" "server" {
   key_name = var.ssh-key # attach ssh key to ec2
 
   # cloud init script
-  user_data = data.template_cloudinit_config.config.rendered 
+  user_data = data.template_cloudinit_config.config.rendered
 
   tags = {
 

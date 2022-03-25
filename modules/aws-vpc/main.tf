@@ -25,7 +25,7 @@ locals {
   cidrsubnet(var.vpc-cidr, 8, 22), cidrsubnet(var.vpc-cidr, 8, 23)]
 
   # stores number of components to create
-  public_instances = var.pub-counter <= length(local.public_cidr_list) ? var.pub-counter : length(local.public_cidr_list)
+  public_instances  = var.pub-counter <= length(local.public_cidr_list) ? var.pub-counter : length(local.public_cidr_list)
   private_instances = var.priv-counter <= length(local.private_cidr_list) ? var.priv-counter : length(local.private_cidr_list)
 
 }

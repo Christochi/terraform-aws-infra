@@ -11,8 +11,8 @@ output "ec2-data" {
 
     ami-id    = data.aws_ami.webserver.id
     ami-name  = data.aws_ami.webserver.name
-    public-ip = join( "", aws_instance.server[*].public_ip ) # separates list
-    sg-id     = join( "", data.aws_security_groups.sg.ids ) # separates list
+    public-ip = join("", aws_instance.server[*].public_ip) # separates list
+    sg-id     = join("", data.aws_security_groups.sg.ids)  # separates list
 
 
   }
