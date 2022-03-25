@@ -40,3 +40,19 @@ variable "sg-outbound" {
   default     = "0.0.0.0/0"
 
 }
+
+variable "pub-counter" {
+
+  description = "number of public network components to spin up"
+  type = number
+  default = 3
+
+}
+
+variable "priv-counter" {
+
+  description = "number of private network components to spin up"
+  type = number
+  default = 3
+
+}
