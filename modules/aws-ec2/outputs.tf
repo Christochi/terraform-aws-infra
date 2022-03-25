@@ -11,8 +11,8 @@ output "ec2-data" {
 
     ami-id    = data.aws_ami.webserver.id
     ami-name  = data.aws_ami.webserver.name
-    public-ip = join( "", aws_instance.server[*].public_ip )
-    sg-id     = join( "", data.aws_security_groups.sg.ids )
+    public-ip = join( "", aws_instance.server[*].public_ip ) # separates list
+    sg-id     = join( "", data.aws_security_groups.sg.ids ) # separates list
 
 
   }
@@ -21,9 +21,11 @@ output "ec2-data" {
 
 }
 
+# see comment in data.tf for more info on how to see the 
+# output in plain text"
 output "ansible" {
 
   value       = data.template_cloudinit_config.config.rendered
-  description = "prints the setup.yml contents. see data.tf for more info"
+  description = "prints the setup.yml contents"
 
 }
