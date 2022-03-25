@@ -14,8 +14,15 @@ main.tf is the root module for calling child module
 - terraform
 - working knowledge of ansible
 
+## Usage
+you can pass the name of the ansible playbook to terraform in `setup-server/terraform.tfvars`
+
+~~~
+playbook = "ansible-wordpress-playbook" 
+~~~
+
 ## Setup
-***in `module/aws-ec2/setup.yml`, an ansible playbook is referenced and also to be executed by cloud init as userdata.***
+***in `module/aws-ec2/setup.yml`, an ansible playbook is referenced and also to be executed by cloud init as EC2 userdata.***
 
 - go to `setup-server/`:
     - run `terraform init` cmd
