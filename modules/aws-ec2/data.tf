@@ -1,11 +1,11 @@
 # renders a template from a template string
 data "template_file" "ansible_bootstrap" {
 
-  template = file("${path.module}/setup.yml")
+  template = file("${path.module}/setup.yml") # ansible role
 
   vars = {
 
-    playbook = var.ansible-playbook
+    playbook = var.ansible-playbook # ansible playbook
 
   }
 
@@ -24,8 +24,9 @@ data "template_cloudinit_config" "config" {
     filename     = "init.cfg"
     content_type = "text/x-shellscript"
 
-    # templatefile fxn reads the file at the given path and renders its content 
-    # as a template 
+    # templatefile fxn reads the file at the given path and renders 
+    # its content as a template 
+    # script.sh executes the yaml file
     content = templatefile(
       "${path.module}/script.sh",
       {
