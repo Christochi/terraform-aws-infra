@@ -9,7 +9,7 @@ builds custom ami using an ami image from amazon, uploads the files and installs
 
 ## Setup
 - cd to `packer/` directory
-- after setting up network infra, copy the `vpc-id` and `subnet-id` outouts from the terminal and include them in the `variables.auto.pkrvars.hcl.exp`
+- after setting up network infra, copy the `vpc-id` and `subnet-id` outputs from the terminal and include them in the `variables.auto.pkrvars.hcl.exp`
 - rename the `variables.auto.pkrvars.hcl.exp` to `variables.auto.pkrvars.hcl`
 - you can also change the region, instance_type, source_ami **(optional)**
 - additional packages can be installed, depending on your use case, by adding to `roles/apache/tasks/main.yml` **(optional)**
