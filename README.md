@@ -15,6 +15,8 @@ The Terraform configuration sets up infrastructure for deploying applications. T
 - install ansible
 
 ## Setup
+
+#### VPC Setup
 - spin-up network infrastructure in the [setup-nwk](./setup-nwk/README.md) directory
 - build ami image using packer in the [packer](./packer/README.md) directory **(need to be done once, unless the image was deleted)**
 
