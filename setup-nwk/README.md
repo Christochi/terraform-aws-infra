@@ -15,6 +15,13 @@ custom network made for deploying web applications
 - aws account
 - terraform
 
+## Usage
+you can pass the geographical location of where you want to spin-up the VPC in `setup-nwk/terraform.tfvars`
+
+~~~
+region   = "ca-central-1"  
+~~~
+
 ## Setup
 - configure access and secret key:
 - go to `setup-nwk/`:
