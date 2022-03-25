@@ -16,11 +16,20 @@ custom network made for deploying web applications
 - terraform
 
 ## Usage
-you can pass the geographical location of where you want to spin-up the VPC in `setup-nwk/terraform.tfvars`
+- you can pass the geographical location of where you want to spin-up the VPC in `setup-nwk/terraform.tfvars`
 
-~~~
-region   = "ca-central-1"  
-~~~
+    ~~~
+    region   = "ca-central-1"  
+    ~~~
+
+- add any number of subnets (upto a max of 3) in the root module `setup-nwk/main.tf`
+
+    ~~~
+    # max of 3 components each
+    pub-counter  = 1 # number of public network components to spin up
+    priv-counter = 0 # number of private network components to spin up 
+    ~~~
+
 
 ## Setup
 - configure access and secret key:
