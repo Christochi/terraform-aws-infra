@@ -24,11 +24,11 @@ custom network made for deploying web applications
 
 - add any number of subnets (upto a max of 3) in the root module `setup-nwk/main.tf`
 
-    ~~~
+    ```
     # max of 3 components each
     pub-counter  = 1 # number of public network components to spin up
     priv-counter = 0 # number of private network components to spin up 
-    ~~~
+    ```
 
 
 ## Setup
