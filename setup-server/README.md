@@ -15,9 +15,10 @@ main.tf is the root module for calling child module
 - working knowledge of ansible
 
 ## Usage
-you can pass the name of the ansible playbook to terraform in `setup-server/terraform.tfvars`
+you can pass the geographical location of where you want to spin-up the instance, and name of the ansible playbook to terraform in `setup-server/terraform.tfvars`
 
 ~~~
+region   = "ca-central-1" 
 playbook = "ansible-wordpress-playbook" 
 ~~~
 
