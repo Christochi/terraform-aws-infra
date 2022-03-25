@@ -1,4 +1,4 @@
-# fetch subnet id
+# find and fetch subnet id using the tag name of the subnet
 data "aws_subnet" "west_subnet" {
 
   filter {
@@ -10,7 +10,7 @@ data "aws_subnet" "west_subnet" {
 
 }
 
-# get custom ami built by packer
+# get custom ami built by packer using regex value, ebs and hvm
 data "aws_ami" "webserver" {
 
   owners      = ["self"]
@@ -29,7 +29,7 @@ data "aws_ami" "webserver" {
 
 }
 
-# get security groups id
+# get security groups id using the tag name of the sg
 data "aws_security_groups" "sg" {
 
   filter {
@@ -44,9 +44,10 @@ data "aws_security_groups" "sg" {
 # create EC2 instance
 resource "aws_instance" "server" {
 
-  count = var.create ? 1 : 0
+  # 1 = true/create, 0 = false/don't create
+  count = var.create ? 1 : 0 
 
-  ami           = data.aws_ami.webserver.id # ami in us-west-2
+  ami           = data.aws_ami.webserver.id 
   instance_type = var.instance
 
   subnet_id = data.aws_subnet.west_subnet.id
@@ -57,7 +58,8 @@ resource "aws_instance" "server" {
 
   key_name = var.ssh-key # attach ssh key to ec2
 
-  user_data = data.template_cloudinit_config.config.rendered
+  # cloud init script
+  user_data = data.template_cloudinit_config.config.rendered 
 
   tags = {
 
