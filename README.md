@@ -1,5 +1,8 @@
 # Terraform-AWS-Webapp
 
+## Infrastructure Diagram
+![Alt](infra-diagram.png)
+
 ## Description
 The Terraform configuration sets up infrastructure for deploying applications. The directory structure of the terraform configuration consists of:
 - `modules`
