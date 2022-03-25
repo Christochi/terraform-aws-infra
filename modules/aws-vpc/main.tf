@@ -14,7 +14,7 @@ resource "aws_vpc" "my_vpc" {
 
 }
 
-# local variables for public and private cidr blocks
+# local variables for public and private network components
 locals {
 
   # cidrsubnet() formulates the cidr block addresses
@@ -24,15 +24,19 @@ locals {
   private_cidr_list = [cidrsubnet(var.vpc-cidr, 8, 21),
   cidrsubnet(var.vpc-cidr, 8, 22), cidrsubnet(var.vpc-cidr, 8, 23)]
 
+  # stores number of components to create
+  public_instances = var.pub-counter <= length(local.public_cidr_list) ? var.pub-counter : length(local.public_cidr_list)
+  private_instances = var.priv-counter <= length(local.private_cidr_list) ? var.priv-counter : length(local.private_cidr_list)
+
 }
 
-# creates 3 public subnets in 3 azs
+# creates public subnet(s) in any azs
 resource "aws_subnet" "public_subnet" {
 
   vpc_id = aws_vpc.my_vpc.id # vpc id
 
-  # number of public subnets (3)
-  count = length(local.public_cidr_list)
+  # number of public subnet(s)
+  count = local.public_instances
 
   # returns cibr block value per iteration
   cidr_block = local.public_cidr_list[count.index]
@@ -51,13 +55,13 @@ resource "aws_subnet" "public_subnet" {
 
 }
 
-# creates 3 private subnets in 3 azs
+# creates private subnet(s) in 3 azs
 resource "aws_subnet" "private_subnet" {
 
   vpc_id = aws_vpc.my_vpc.id # vpc id
 
-  # number of private subnets (3)
-  count = length(local.private_cidr_list)
+  # number of private subnet(s)
+  count = local.private_instances
 
   # returns cibr block value per iteration
   cidr_block = local.private_cidr_list[count.index]
@@ -98,18 +102,18 @@ resource "aws_eip" "eip" {
 
 }
 
-# create NAT gateway in the public subnets
+# create NAT gateway in the public subnet(s)
 resource "aws_nat_gateway" "nat" {
 
   allocation_id = aws_eip.eip.id # EIP allocation ID
 
-  # count     = length(aws_subnet.public_subnet) # create 3 NATs
+  # count     = length(aws_subnet.public_subnet) # create NATs
   # subnet_id = aws_subnet.public_subnet[count.index].id
   subnet_id = aws_subnet.public_subnet[0].id
 
   tags = {
 
-    Name = "${var.tags.prefix}-nat-${0}"
+    Name = "${var.tags.prefix}-nat-${length(aws_subnet.public_subnet)}"
 
   }
 
@@ -134,9 +138,10 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
-# associates 3 public subnet to route table
+# associates public subnet(s) to route table
 resource "aws_route_table_association" "public_route_table_assoc" {
 
+  # number of instances to create
   count     = length(aws_subnet.public_subnet)
   subnet_id = aws_subnet.public_subnet[count.index].id
 
@@ -164,7 +169,7 @@ resource "aws_route_table" "private_route_table" {
 
 }
 
-# associates 3 private subnet to route table
+# associates private subnet(s) to route table
 resource "aws_route_table_association" "private_route_table_assoc" {
 
   count     = length(aws_subnet.public_subnet)
