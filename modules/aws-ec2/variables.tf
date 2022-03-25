@@ -1,7 +1,7 @@
 variable "ec2-tags" {
 
   type        = map(string)
-  description = "filtering info about the instance"
+  description = "filter-data for the instance"
 
   default = {
 
@@ -47,7 +47,7 @@ variable "ansible-playbook" {
   type        = string
   description = "placeholder for ansible vault playbook"
 
-  default = "ansible-vault"
+  default = ""
 
 }
 
