@@ -4,7 +4,7 @@ data "aws_subnet" "west_subnet" {
   filter {
 
     name   = "tag:Name"
-    values = ["${var.ec2-tags.name}public-subnet-3"]
+    values = ["${var.ec2-tags.name}public-subnet-1"]
 
   }
 
