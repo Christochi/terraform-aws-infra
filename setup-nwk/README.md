@@ -30,6 +30,11 @@ custom network made for deploying web applications
     priv-counter = 0 # number of private network components to spin up 
     ```
 
+## Outputs
+- `vpc-id` - VPC id
+- `subnet-id` - Subnet id(s) 
+- `sg-id` - Security Group ID
+- `subnet-az` - Availability Zone of the subnet
 
 ## Setup
 - configure access and secret key:
